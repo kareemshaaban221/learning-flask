@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+    <title>Main Page</title>
+{% endblock %}
+
+{% block body %}
+    <table border="1" class="mx-auto mt-5">
+        <!-- header -->
+        <tr>
+            <th class="p-2">Task</th>
+            <th class="p-2">Added</th>
+            <th class="p-2">Actions</th>
+        </tr>
+
+        <!-- data -->
+        {% for task in tasks %}
+            <tr>
+                <td rowspan="2" class="p-2">{{ task.content }}</td>
+                <td rowspan="2" class="p-2">{{ task.created_at.date() }}</td>
+                <td class="p-2">
+                    <a href="/update/{{ task.id }}">Update</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <a href="/delete/{{ task.id }}" class="text-danger link-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <form action="/" method="post" class="w-50 mx-auto mt-5 row justify-content-center">
+        <input type="text" name="task" class="form-control col-6 mr-1" placeholder="Add Task">
+        <input type="submit" value="Add Task" class="btn btn-primary d-block col-2 ml-1">
+    </form>
+{% endblock %}
